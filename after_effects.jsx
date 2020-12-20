@@ -15,5 +15,8 @@
   addWindow(currentComp, 'left', [1,1,1], [0,0,0]);
   addWindow(currentComp, 'right', [0,0,0], [1,1,1]);
 
+  addTerminalText(currentComp, '$test text');
+  addFileText(currentComp, 'test text');
+
   app.endUndoGroup();
 }

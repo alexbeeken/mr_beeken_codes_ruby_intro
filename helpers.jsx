@@ -24,4 +24,28 @@ var addWindow = function (comp, side, stroke, fill) {
 
   var fillGroup = newWindow.property('Contents').property('Terminal').property('Contents').addProperty('ADBE Vector Graphic - Fill');
   fillGroup.property('Color').setValue(fill);
-}
+};
+
+var addTerminalText = function (comp, sourceText) {
+  addText(comp, sourceText, [43.2, 95.4], [0.16,0.98,0.11], 40, ParagraphJustification.LEFT_JUSTIFY, 'terminal text');
+};
+
+var addFileText = function (comp, sourceText) {
+  addText(comp, sourceText, [1001.2, 86.4], [0,0,0], 30, ParagraphJustification.LEFT_JUSTIFY, 'file text');
+};
+
+var addText = function (comp, sourceText, position, color, size, justify, name) {
+  var newText = comp.layers.addText(sourceText);
+
+  newText.name = name;
+  newText.property('Position').setValue(position);
+
+  var textProp = newText.property('Source Text');
+  var textDocument = textProp.value;
+
+  textDocument.fillColor = color;
+  textDocument.fontSize = size;
+  textDocument.justification= justify;
+
+  textProp.setValue(textDocument);
+};
