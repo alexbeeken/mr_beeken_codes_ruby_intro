@@ -1,7 +1,7 @@
-#include "helpers.jsx"
+#include 'helpers.jsx'
+#include 'animations.jsx'
 
 {
-
   app.beginUndoGroup("demo script");
 
   var currentProject = (app.project) ? app.project : app.newProject();
@@ -16,15 +16,22 @@
   addWindow(currentComp, 'right', [0,0,0], [1,1,1]);
 
   var terminalTextLayer = addTerminalText(currentComp, '$');
-  var editorTextLayer = addFileText(currentComp, 'puts "hello_world!"');
-
+  var editorTextLayer = addFileText(currentComp, editorText);
+  var chunks = terminalActions.split(';');
+  var numberOfChunks = getArrayLength(chunks);
   var time = 1.0;
 
-  time = typeIn(terminalTextLayer, 'print hello_world.rb', time, 0.1);
+  for (var i = 0; i < numberOfChunks; i++) {
+    var line = chunks[i].split(':');
+    var animation = line[0];
+    var content = line[1];
 
-  time = time + 0.2;
-
-  output(terminalTextLayer, 'hello,world!', time);
+    if (animation.indexOf('input') > -1) {
+      time = typeIn(terminalTextLayer, content, time, 0.1);
+    } else if (animation.indexOf('output') > -1) {
+      output(terminalTextLayer, content, time);
+    };
+  }
 
   app.endUndoGroup();
 }

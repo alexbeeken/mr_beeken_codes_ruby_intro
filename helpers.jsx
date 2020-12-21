@@ -101,7 +101,20 @@ var output = function (textLayer, text, startTime) {
   var textProp = textLayer.property('Source Text');
   var currentTextDoc = textProp.valueAtTime(startTime, true);
   var currentText = currentTextDoc.text;
-  var newText = currentText + '\n' + text + '\n$';
+  var newText = currentText + '\n' + text + '$';
 
   textProp.setValueAtTime(startTime, newText);
+};
+
+var getArrayLength = function (array) {
+  var len = 0;
+  var i;
+
+  for (i in array) {
+    if (array.hasOwnProperty(i)) {
+      len++;
+    }
+  }
+
+  return len;
 };
