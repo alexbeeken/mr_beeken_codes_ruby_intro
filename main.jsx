@@ -1,5 +1,5 @@
 #include 'helpers.jsx'
-#include 'animations.jsx'
+#include 'season1/episode2/2.jsx'
 
 {
   app.beginUndoGroup("demo script");
