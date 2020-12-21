@@ -2,7 +2,7 @@ var addWindow = function (comp, side, stroke, fill) {
   var newWindow = comp.layers.addShape();
 
   newWindow.closed = true;
-  newWindow.name = 'terminal window'; 
+  newWindow.name = 'terminal window';
 
   var newGroup = newWindow.property('Contents').addProperty('ADBE Vector Group');
   newGroup.name = 'Terminal';
@@ -26,15 +26,37 @@ var addWindow = function (comp, side, stroke, fill) {
   fillGroup.property('Color').setValue(fill);
 };
 
-var addTerminalText = function (comp, sourceText) {
-  addText(comp, sourceText, [43.2, 95.4], [0.16,0.98,0.11], 40, ParagraphJustification.LEFT_JUSTIFY, 'terminal text');
+var addTerminalText = function (comp, sourceText, startTime) {
+  return addText(
+    comp,
+    sourceText,
+    [43.2, 95.4],
+    [0.16,0.98,0.11],
+    40,
+    ParagraphJustification.LEFT_JUSTIFY,
+    'terminal text',
+    startTime
+  );
 };
 
-var addFileText = function (comp, sourceText) {
-  addText(comp, sourceText, [1001.2, 86.4], [0,0,0], 30, ParagraphJustification.LEFT_JUSTIFY, 'file text');
+var addFileText = function (comp, sourceText, startTime) {
+  return addText(
+    comp,
+    sourceText,
+    [1001.2, 86.4],
+    [0,0,0],
+    30,
+    ParagraphJustification.LEFT_JUSTIFY,
+    'file text',
+    startTime
+  );
 };
 
-var addText = function (comp, sourceText, position, color, size, justify, name) {
+var addText = function (comp, sourceText, position, color, size, justify, name, startTime) {
+  if (!startTime) {
+    startTime = 0.0;
+  }
+
   var newText = comp.layers.addText(sourceText);
 
   newText.name = name;
@@ -47,5 +69,39 @@ var addText = function (comp, sourceText, position, color, size, justify, name) 
   textDocument.fontSize = size;
   textDocument.justification= justify;
 
-  textProp.setValue(textDocument);
+  textProp.setValueAtTime(startTime, textDocument);
+
+  return newText;
+};
+
+var typeIn = function (textLayer, text, startTime, speed) {
+  var textProp = textLayer.property('Source Text');
+  var currentTextDoc = textProp.value;
+  var currentText = currentTextDoc.text;
+
+  textProp.setValueAtTime(startTime, currentText);
+
+  var chars = text.split('');
+  var accumulator = currentText;
+  var time = startTime;
+
+  for (var i = 0; i < chars.length; i++) {
+    accumulator = accumulator.concat(chars[i]);
+    var newText = new TextDocument(accumulator);
+
+    textProp.setValueAtTime(time, newText);
+
+    time = time + speed;
+  };
+
+  return time;
+};
+
+var output = function (textLayer, text, startTime) {
+  var textProp = textLayer.property('Source Text');
+  var currentTextDoc = textProp.valueAtTime(startTime, true);
+  var currentText = currentTextDoc.text;
+  var newText = currentText + '\n' + text + '\n$';
+
+  textProp.setValueAtTime(startTime, newText);
 };

@@ -15,8 +15,16 @@
   addWindow(currentComp, 'left', [1,1,1], [0,0,0]);
   addWindow(currentComp, 'right', [0,0,0], [1,1,1]);
 
-  addTerminalText(currentComp, '$test text');
-  addFileText(currentComp, 'test text');
+  var terminalTextLayer = addTerminalText(currentComp, '$');
+  var editorTextLayer = addFileText(currentComp, 'puts "hello_world!"');
+
+  var time = 1.0;
+
+  time = typeIn(terminalTextLayer, 'print hello_world.rb', time, 0.1);
+
+  time = time + 0.2;
+
+  output(terminalTextLayer, 'hello,world!', time);
 
   app.endUndoGroup();
 }
