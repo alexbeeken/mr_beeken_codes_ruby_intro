@@ -1,6 +1,6 @@
 var terminalActions = " \
 input:ruby hello_world.rb; \
-output:hello, world! \
+output:1:hello, world! \
 ";
 
 var editorText = "puts 'hello, world!'";

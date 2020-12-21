@@ -1,6 +1,6 @@
 var terminalActions = " \
 input:ruby math.rb; \
-output:1: \
+output:1: 7$\
 ";
 
-var editorText = "5 + 2";
+var editorText = "print 5 + 2";

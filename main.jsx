@@ -1,5 +1,5 @@
 #include 'helpers.jsx'
-#include 'season1/episode2/2.jsx'
+#include 'season1/episode2/7.jsx'
 
 {
   app.beginUndoGroup("demo script");
@@ -24,11 +24,17 @@
   for (var i = 0; i < numberOfChunks; i++) {
     var line = chunks[i].split(':');
     var animation = line[0];
-    var content = line[1];
 
     if (animation.indexOf('input') > -1) {
+      var content = line[1];
+
       time = typeIn(terminalTextLayer, content, time, 0.1);
     } else if (animation.indexOf('output') > -1) {
+      var delay = line[1];
+      var content = line[2];
+
+      time = time + parseFloat(delay);
+
       output(terminalTextLayer, content, time);
     };
   }
