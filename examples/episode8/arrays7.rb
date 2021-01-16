@@ -1,0 +1,3 @@
+movies = []
+
+puts movies
