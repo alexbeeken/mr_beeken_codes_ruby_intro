@@ -1,7 +1,13 @@
-#include 'helpers.jsx'
-#include 'season1/episode2/7.jsx'
+#include '/Users/alex/Code/mr_beeken_codes_ruby_intro/helpers.jsx'
 
 {
+  var terminalActions = " \
+  input:INPUTFILE; \
+  output:DELAY: RESULT\
+  ";
+
+  var editorText = SCRIPTCONTENT;
+
   app.beginUndoGroup("demo script");
 
   var currentProject = (app.project) ? app.project : app.newProject();
