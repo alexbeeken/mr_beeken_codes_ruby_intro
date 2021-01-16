@@ -2,9 +2,8 @@
 
 {
   var terminalActions = " \
-  input:INPUTFILE; \
-  output:DELAY: RESULT\
-  ";
+  input:INPUTFILE;\
+  output:DELAY: RESULT\n";
 
   var editorText = SCRIPTCONTENT;
 
