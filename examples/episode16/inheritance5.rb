@@ -1,0 +1,1 @@
+puts Object.superclass
