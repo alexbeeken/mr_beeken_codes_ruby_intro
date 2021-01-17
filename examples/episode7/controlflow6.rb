@@ -5,7 +5,7 @@ def check_num(number)
     puts "no!"
   end
 
-  if (number == 12) do
+  if (number == 12)
     puts "twelve!"
   end
 end

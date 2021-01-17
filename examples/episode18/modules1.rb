@@ -5,7 +5,7 @@ class Plant
   end
 
   def display_name
-    @name.capialize
+    @name.capitalize
   end
 end
 
@@ -16,7 +16,7 @@ class Planet
   end
 
   def display_name
-    @name.capialize
+    @name.capitalize
   end
 end
 

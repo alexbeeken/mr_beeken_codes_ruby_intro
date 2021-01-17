@@ -1,4 +1,4 @@
-def hello_message(arguments)
+def hello_message(arguments = {})
   name = arguments[:name] || 'alex'
   pronoun = arguments[:pronoun]  || 'he'
   emotion = arguments[:emotion]  || 'happy'

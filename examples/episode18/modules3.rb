@@ -1,13 +1,14 @@
 module NameHelpers
   def display_name
-    first_letter = @name[0].upcase!
-    rest = @name[1..-1]
-
-    "#{first_letter}#{rest}"
+    @name.capitalize
   end
 
-  def self.has_a_name? 
-    true
+  def self.included(base) 
+    base.class_eval do
+      def self.has_a_name?
+        true
+      end
+    end
   end
 end
 

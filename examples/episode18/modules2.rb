@@ -1,9 +1,6 @@
 module NameHelpers
   def display_name
-    first_letter = @name[0].upcase!
-    rest = @name[1..-1]
-
-    "#{first_letter}#{rest}"
+    @name.capitalize
   end
 end
 

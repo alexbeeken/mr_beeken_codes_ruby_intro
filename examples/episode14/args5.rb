@@ -1,5 +1,5 @@
 def show_info(object)
-  if object.kind_of? Number
+  if object.kind_of? Integer
     "the person is #{object.to_s} years old"
   elsif object.kind_of? String
     "their name is #{object}."
